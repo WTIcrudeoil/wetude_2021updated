@@ -1,13 +1,23 @@
-import express from "express"
+import express from "express";
 // const app = express();
+import morgan from "morgan";
 
 const PORT = 4000;
 
 //make an express application
 const app = express();
+const logger = morgan("dev");
 
-app.get("/", (chicken,res)=> res.send("<h1>I still love you.</h1>"));
-app.get("/login", (req,res)=> res.send("Login here."));
+const routerLogger = (req,res,next) =>{
+next();
+}
+
+const home = (req,res) => res.send("hello");
+
+
+app.use(logger);
+app.get("/",home);
+
 
 const handleListening = () => console.log(`Server listening on port http://localhost:${PORT}`)
 
