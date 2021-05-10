@@ -10,11 +10,15 @@ Router를 통해서 URL을 그룹화 하여 진행한다.
 /search -> Search
 
 
-/users/edit -> Edit user
-/users/delete -> Delete user
+/users/:id -> See user
+/users/logout -> Log Out
+/users/edit -> Edit My profile
+/users/delete -> Delete My profile
 
-/videos/watch -> Watch Video
-/videos/edit -> Edit Video
-/videos/delete -> Delete Video
+/videos/:id -> Watch Video
+/videos/:id/edit -> Edit Video
+/videos/:id/delete -> Delete Video
+/videos/upload -> Upload Video
+
 /videos/comments -> Comment on a video
 /videos/comments/delete -> Delete A Comment of a Video
