@@ -17,7 +17,8 @@ next();
 
 const home = (req,res) => res.send("hello");
 
-
+app.set("view engine","pug");
+app.set("views",process.cwd() + "/src/views");
 app.use(logger);
 
 app.use("/",globalRouter);
