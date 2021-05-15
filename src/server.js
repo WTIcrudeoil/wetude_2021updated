@@ -1,3 +1,5 @@
+import "./db";
+import Video from "./models/Video";
 import express from "express";
 // const app = express();
 import morgan from "morgan";
