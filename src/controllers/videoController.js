@@ -1,45 +1,23 @@
-const fakeUser ={
-    username:"Lee dong",
-    loggedIn:true,
-};
-let videos = [
-    {
-        title:"First video",
-        rating:5,
-        comments:2,
-        createdAt:"2 hour ago",
-        views:1,
-        id:1,
-    },
-    {
-        title:"Second video",
-        rating:5,
-        comments:19,
-        createdAt:"2 hour ago",
-        views:19,
-        id:2,
-    },
-    {
-        title:"3 video",
-        rating:3.5,
-        comments:12,
-        createdAt:"2 hour ago",
-        views:9,
-        id:3,
-    },
-];
-export const trending = (req,res) => {
-    res.render("home",{pageTitle:"Home",fakeUser,videos});
+import Video from "../models/Video";
+
+
+export const home = async (req,res) => {
+    try{
+        const videos = await Video.find({})
+        res.render("home",{pageTitle:"Home",videos});
+    } catch {
+        return res.render("server-error")
+    }    
 }
 export const watch = (req,res) => {
     const { id } = req.params;
-    const video = videos[id-1]
-    res.render("watch",{pageTitle:`Watching ${video.title}`,fakeUser,video});
+ 
+    res.render("watch",{pageTitle:`Watching ${video.title}`});
 }
 export const getEdit = (req,res) => {
     const { id } = req.params;
-    const video = videos[id-1]
-    res.render("edit",{pageTitle:`Editing: ${video.title}`,fakeUser,video});
+    
+    res.render("edit",{pageTitle:`Editing: ${video.title}`});
 };
 export const postEdit =(req,res) =>{
     const { id } = req.params;
@@ -47,20 +25,12 @@ export const postEdit =(req,res) =>{
     return res.redirect(`/videos/${id}`);
 }
 export const getUpload = (req,res) =>{
-    return res.render("upload",{pageTitle:`Upload video`,fakeUser,videos});
+    return res.render("upload",{pageTitle:`Upload video`,videos});
 };
 export const postUpload = (req,res) =>{
     //here we will add a video to the videos array.
     const {title} =req.body
-    const newVideo ={
-        title,
-        rating:0,
-        comments:0,
-        createdAt:"just now",
-        views:0,
-        id:videos.length +1,
-    }
-    videos.push(newVideo)
+    
     return res.redirect("/");
 }
 
